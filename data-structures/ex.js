@@ -17,9 +17,11 @@ var filteredNumsProducts = mapObj(function(list){
 	return listProduct(list);
 },filteredNums);
 
-reduceObj(function(acc,v){
-	return acc + v;
-},0,filteredNumsProducts);
+console.log(
+	reduceObj(function(acc,v){
+		return acc + v;
+	},0,filteredNumsProducts)
+);
 // 38886
 
 
@@ -35,11 +37,25 @@ function mapObj(mapperFn,o) {
 }
 
 function filterObj(predicateFn,o) {
-	// TODO
+	var newObj = {};
+	var keys = Object.keys(o);
+
+	for (let key of keys) {
+		if (predicateFn( o[key] )) {
+			newObj[key] = o[key];
+		}
+	}
+	return newObj;
 }
 
 function reduceObj(reducerFn,initialValue,o) {
-	// TODO
+	var init = initialValue;
+	var keys = Object.keys(o);
+
+	for (let key of keys) {
+		init = reducerFn(init, o[key])
+	}
+	return init;
 }
 
 
